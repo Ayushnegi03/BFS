@@ -1,0 +1,66 @@
+//Breadth Fisrt Search
+//The Breadth First Search (BFS) traversal is an algorithm, which is used to visit all of the nodes of a given graph
+#include<iostream>
+#include<queue>
+#define NODE 6
+using namespace std;
+typedef struct node{
+   int val;
+   int STATE; 
+}node;
+int graph[NODE][NODE] = {
+   {0, 1, 1, 1, 0, 0},
+   {1, 0, 0, 1, 1, 0},
+   {1, 0, 0, 1, 0, 1},
+   {1, 1, 1, 0, 1, 1},
+   {0, 1, 0, 1, 0, 1},
+   {0, 0, 1, 1, 1, 0}
+};
+void BFS(node *vert, node s)
+{
+   node u;
+   int i, j;
+   queue<node> que;
+   for(i = 0; i<NODE; i++)
+   {
+      vert[i].STATE= 0; 
+   }
+   vert[s.val].STATE= 1;
+   que.push(s);
+   while(!que.empty()){
+      u = que.front(); 
+      que.pop();
+      cout << char(u.val+'A') << "\t";
+      for(i = 0; i<NODE; i++){
+         if(graph[i][u.val]){
+            if(vert[i].STATE == 0){
+               vert[i].STATE = 1;
+               que.push(vert[i]);
+            }
+         }
+      }
+      u.STATE = 2;
+   }
+
+    
+}
+int main()
+{
+   node Vertices[NODE];
+   node START;
+   char s;
+   for(int i = 0; i<NODE; i++)
+   {
+      Vertices[i].val = i;
+   }
+   s = 'B';
+   START.val = s-'B';
+   cout<<"Here is Breadth First Search"<<endl;
+   cout << "BFS Traversal:"<<endl;
+   BFS(Vertices, START);
+   cout << endl;
+}
+//Output-
+//Here is Breadth First Search
+//BFS Traversal:
+//A	B	C	D	E	F
