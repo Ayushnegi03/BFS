@@ -1,0 +1,31 @@
+#Breadth First Search
+from collections import defaultdict
+class Graph:
+    def __init__(self):
+        self.graph = defaultdict(list)
+    def AddEdge(self,x,y):
+        self.graph[x].append(y)
+    def Bfs(self, s):
+        visited = [False] * (max(self.graph) + 1)
+        queue = []
+        queue.append(s)
+        visited[s] = True 
+        while queue:
+            s = queue.pop(0)
+            print (s, end = " ")
+            for i in self.graph[s]:
+                if visited[i] == False:
+                    queue.append(i)
+                    visited[i] = True
+g = Graph()
+g.AddEdge(0, 1)
+g.AddEdge(0, 2)
+g.AddEdge(1, 2)
+g.AddEdge(2, 0)
+g.AddEdge(2, 3)
+g.AddEdge(3, 3) 
+print ("Following is Breadth First Traversal (starting from vertex 2)")
+g.Bfs(2)
+#Output-
+#Following is Breadth First Traversal (starting from vertex 2)
+#2 0 3 1
